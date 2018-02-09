@@ -20,15 +20,24 @@ function getNews() {
 
 function addNews(){
   const data = JSON.parse(this.responseText);
-  const article = data.response.docs[0];
-  const title = article.headline.main;
-  const snippet = article.snippet;
+  const articles = data.response.docs;
 
-  let li = document.createElement('li');
-  li.className = 'articleClass';
-  li.innerText = snippet;
+  articles.forEach(function(article){
+    const title = article.headline.main;
+    const snippet = article.snippet;
 
-  responseContainer.appendChild(li);
+    let li = document.createElement('li');
+    let h1 = document.createElement('h1');
+    let pSnippet = document.createElement('p');
+
+    li.className = 'articleClass';
+    h1.innerText = title;
+    pSnippet.innerText = snippet;
+
+    li.appendChild(h1);
+    li.appendChild(pSnippet);
+    responseContainer.appendChild(li);
+  });
 }
 
 
